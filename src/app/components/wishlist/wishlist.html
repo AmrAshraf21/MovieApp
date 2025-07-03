@@ -1,0 +1,219 @@
+<!-- features/wishlist/pages/wishlist/wishlist.component.html -->
+<!-- <div class="container">
+  <h1>Your Wishlist</h1>
+  
+  @if (wishlistItems().length === 0) {
+    <div class="empty-wishlist">
+      <i class="pi pi-heart"></i>
+      <img src="/images/Group.png" alt="">
+      <p class="no">No Movies in watch list</p>
+      <p-button 
+        label="Back to Home" 
+        icon="pi pi-film"
+        class="browse"
+        severity="warn"
+        routerLink="/"
+      ></p-button>
+      
+
+    </div>
+  } @else {
+    <div class="wishlist-items">
+      @for (item of wishlistItems(); track item.id) {
+        <div class="wishlist-item">
+          @if (item.type === 'movie') {
+            <app-movie-card [movie]="asMovie(item)"></app-movie-card>
+          } @else {
+            <app-tv-show-card [tvShow]="asTVShow(item)"></app-tv-show-card>
+          }
+          <button 
+            pButton 
+            icon="pi pi-times" 
+            class="p-button-rounded p-button-danger remove-button"
+            (click)="removeFromWishlist(item.id, item.type)"
+          ></button>
+        </div>
+      }
+    </div>
+  }
+</div> -->
+
+
+<section class="wishlist-section">
+  <div class="container">
+
+
+    <h1>Watch list</h1>
+
+    @if (wishlistItems().length === 0) {
+    <div class="empty-wishlist">
+      <!-- <i class="pi pi-heart"></i> -->
+      <img src="/images/Group.png" alt="">
+      <p class="no">No Movies in watch list</p>
+      <p-button label="Back to Home" icon="pi pi-film" class="browse" severity="warn" routerLink="/"></p-button>
+
+    </div>
+  }@else {
+    @if(movies().length){
+      
+      <h2>Movies ({{ movies().length }})</h2>
+    }
+    <div class="wishlist-wrapper">
+      
+      
+      @for(item of movies();track $index ){
+        
+        <div class="wishlist-card">
+          <a [routerLink]="['/movies',item.id]">
+          <div class="image">
+        <img [src]="'https://image.tmdb.org/t/p/'+'/w200'+item.poster_path" [alt]="item.title" class="poster" />
+            
+              <!-- <img [src]="item.poster_path | posterUrl:'w154'" alt=""> -->
+            </div>
+          </a>
+      <div class="content">
+        
+        <h2>{{item.title}}</h2>
+        <span>{{item.release_date! | monthTranform }}</span>
+        <div class="rate">
+          @if(item.vote_average < 2){ <i class="pi pi-star-fill"></i>
+          <i class="pi pi-star"></i>
+          <i class="pi pi-star"></i>
+          <i class="pi pi-star"></i>
+          <i class="pi pi-star"></i>
+
+        }@else if(item.vote_average < 4 && item.vote_average> 2){
+                <i class="pi pi-star-fill"></i>
+                <i class="pi pi-star-fill"></i>
+                <i class="pi pi-star"></i>
+                <i class="pi pi-star"></i>
+                <i class="pi pi-star"></i>
+                
+              } @else if(item.vote_average <= 6){ <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star"></i>
+              <i class="pi pi-star"></i>
+              
+            }@else if(item.vote_average <= 8){ <i class="pi pi-star-fill"></i>
+            <i class="pi pi-star-fill"></i>
+            <i class="pi pi-star-fill"></i>
+            <i class="pi pi-star-fill"></i>
+            <i class="pi pi-star"></i>
+            
+          }
+          @else {
+            <i class="pi pi-star-fill"></i>
+            <i class="pi pi-star-fill"></i>
+            <i class="pi pi-star-fill"></i>
+            <i class="pi pi-star-fill"></i>
+            <i class="pi pi-star-fill"></i>
+            
+          }
+          <span>{{item.vote_count}}</span>
+          
+        </div>
+        
+          <p>{{item.overview}}</p>
+        </div>
+        <div>
+          
+          
+          <p-button icon="pi pi-times" (click)="removeFromWishlist(item.id,item.type)" severity="danger" />
+          
+          
+        </div>
+      </div>
+    }
+  </div>
+  
+
+    
+    }
+
+
+      @if(tvShows().length){
+
+    <h2>TV Shows ({{ tvShows().length }})</h2>
+    }
+    
+
+   <div class="wishlist-wrapper">
+ 
+  
+@for(item  of tvShows();track $index ){
+  <div class="wishlist-card">
+    <a [routerLink]="['/tv-shows',item.id]">
+      
+      <div class="image">
+        <img [src]="item.poster_path | posterUrl:'w185'" alt="">
+      </div>
+    </a>
+    <div class="content">
+
+          <h2>{{item.name}}</h2>
+          <span>{{item.first_air_date| date }}</span>
+          <div class="rate">
+            @if(item.vote_average < 2){ <i class="pi pi-star-fill"></i>
+              <i class="pi pi-star"></i>
+              <i class="pi pi-star"></i>
+              <i class="pi pi-star"></i>
+              <i class="pi pi-star"></i>
+
+              }@else if(item.vote_average < 4 && item.vote_average> 2){
+                <i class="pi pi-star-fill"></i>
+                <i class="pi pi-star-fill"></i>
+                <i class="pi pi-star"></i>
+                <i class="pi pi-star"></i>
+                <i class="pi pi-star"></i>
+
+                } @else if(item.vote_average <= 6){ <i class="pi pi-star-fill"></i>
+                  <i class="pi pi-star-fill"></i>
+                  <i class="pi pi-star-fill"></i>
+                  <i class="pi pi-star"></i>
+                  <i class="pi pi-star"></i>
+
+                  }@else if(item.vote_average <= 8){ <i class="pi pi-star-fill"></i>
+                    <i class="pi pi-star-fill"></i>
+                    <i class="pi pi-star-fill"></i>
+                    <i class="pi pi-star-fill"></i>
+                    <i class="pi pi-star"></i>
+
+                    }
+                    @else {
+                    <i class="pi pi-star-fill"></i>
+                    <i class="pi pi-star-fill"></i>
+                    <i class="pi pi-star-fill"></i>
+                    <i class="pi pi-star-fill"></i>
+                    <i class="pi pi-star-fill"></i>
+
+                    }
+                    <span>{{item.vote_count}}</span>
+
+          </div>
+
+          <p>{{item.overview.trim().slice(0,200)}}....
+            
+
+          </p>
+        </div>
+        <div>
+
+
+          <p-button icon="pi pi-times" (click)="removeFromWishlist(item.id,item.type)" severity="danger" />
+
+
+        </div>
+  </div>
+}
+</div>
+
+
+  
+
+  </div>
+
+
+</section>
+
+

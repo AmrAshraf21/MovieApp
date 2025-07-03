@@ -1,0 +1,33 @@
+<div class="tv-show-card" [routerLink]="['/tv-shows', tvShow.id]">
+  <div class="poster-container">
+    <img 
+      [src]="tvShow.poster_path | posterUrl:'w500'" 
+      [alt]="tvShow.name"
+      class="poster"
+    />
+  </div>
+  
+  <p-badge class="badge" value="TV" badgeSize="xlarge" severity="contrast"/>   
+    
+    <div class="heading">
+      <h3 class="title">{{ tvShow.name }}</h3>
+
+      <button 
+      class="wishlist-button" 
+      (click)="toggleWishlist($event)"
+      [ngClass]="{ 'active': isInWishlist() }"
+      >
+      <app-heart-icon [filled]="isInWishlist()"></app-heart-icon>
+    </button>
+  </div>
+    <div class="details">
+      <span class="rating">
+        <i class="pi pi-star-fill"></i>
+        {{ tvShow.vote_average | number:'1.1-1' }}
+      </span>
+      <span class="first-air-date">
+        {{ tvShow.first_air_date | date }}
+      </span>
+  
+  </div>
+</div>

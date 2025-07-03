@@ -1,0 +1,132 @@
+@if(isLoading()){
+<p-progress-spinner ariaLabel="loading" />
+
+}@else {
+
+<div class="container">
+    <div class="wrapper">
+        <div class="image">
+            <!-- <p-image c  [src]="tvShow()?.poster_path  | posterUrl" class="test" alt="Image" [preview]="true" /> -->
+            <img [src]="tvShow()!.poster_path | posterUrl" class="test" alt="">
+        </div>
+
+        <div class="info">
+
+            <h2>{{tvShow()!.name}}</h2>
+            <p class="overview">{{tvShow()!.overview}}</p>
+            <span class="status">Status:{{tvShow()!.status}}</span>
+            <div class="languages">
+                Languages :
+                @for (item of tvShow()?.spoken_languages; track $index)
+                {
+                <span>{{item.english_name}}</span>
+                }
+            </div>
+            <div class="dates">
+                <span>First Air Date: {{tvShow()?.first_air_date | date}}</span>
+                <span>Last Air Date:{{tvShow()?.last_air_date | date}}</span>
+
+            </div>
+            <div class="genres">
+                @for(genre of tvShow()!.genres;track genre.id){
+                <span>{{genre.name}}</span>
+                }@empty {
+                <p>No Genre Provided</p>
+                }
+            </div>
+            <div class="episodes">
+                <span>Seasons : {{tvShow()?.number_of_seasons}}</span>
+                <span>Episodes : {{tvShow()?.number_of_episodes}}</span>
+            </div>
+            <!-- <div class="season-details">
+                @for(season of tvShow()?.seasons;track season.id){
+                    <div class="card"></div>
+                }
+            </div> -->
+            <div class="votes">
+
+                @if(tvShow()!.vote_average < 2){ <i class="pi pi-star-fill"></i>}
+                    @else if(tvShow()!.vote_average > 2 && tvShow()!.vote_average<= 4) { <i class="pi pi-star-fill"></i>
+                        <i class="pi pi-star-fill"></i>
+                        }
+                        @else if(tvShow()!.vote_average >4 && tvShow()!.vote_average<=6) { <i class="pi pi-star-fill">
+                            </i>
+                            <i class="pi pi-star-fill"></i>
+                            <i class="pi pi-star-fill"></i>
+
+                            }
+                            @else if(tvShow()!.vote_average>6 && tvShow()!.vote_average<=8){ <i class="pi pi-star-fill">
+                                </i>
+                                <i class="pi pi-star-fill"></i>
+                                <i class="pi pi-star-fill"></i>
+                                <i class="pi pi-star-fill"></i>
+
+                                }
+                                @else{
+                                <i class="pi pi-star-fill"></i>
+                                <i class="pi pi-star-fill"></i>
+                                <i class="pi pi-star-fill"></i>
+                                <i class="pi pi-star-fill"></i>
+                                <i class="pi pi-star-fill"></i>
+
+                                }
+
+                                <span>({{tvShow()?.vote_count}})votes</span>
+            </div>
+
+            <div class="production-company">
+                @for (item of tvShow()!.production_companies; track $index)
+                {
+                @if(item.logo_path){
+
+                <img [src]="item.logo_path | posterUrl:'w154'" alt="">
+                }
+                }@empty {
+                <p>No Company Provided</p>
+                }
+            </div>
+
+            <a class="website" [href]="tvShow()!.homepage" target="_blank">Website</a>
+        </div>
+    </div>
+    <div class="seasons">
+
+        <p-tabs value="0" scrollable>
+            <p-tablist>
+                @for(tab of tvShow()!.seasons ; track $index){
+                <p-tab [value]="tab.id">
+                    {{tab.name}}
+                </p-tab>
+                }
+            </p-tablist>
+            <p-tabpanels>
+                @for(tab of tvShow()!.seasons; track $index){
+                <p-tabpanel [value]="tab.id">
+                    <div class="tabs-wrapper">
+
+                        <div class="image">
+                            @if(tab.poster_path){
+
+                                <img [src]="tab.poster_path | posterUrl :'w185'" alt="">
+                            }@else {
+
+                                <img  src="/images/no-image.jpg" alt="">
+                            }
+                        </div>
+                        <div class="info">
+
+                            <span class="air-date">{{tab.air_date | date}}</span>
+                            <p class="numbers">Number of episodes : <span>{{tab.episode_count}}</span></p>
+                            <p class="overview">{{ tab.overview }}</p>
+                            <p class="rate"><i class="pi pi-star-fill"></i> {{tab.vote_average}}</p>
+                        </div>
+                    </div>
+                </p-tabpanel>
+                }
+            </p-tabpanels>
+        </p-tabs>
+    </div>
+
+
+</div>
+}

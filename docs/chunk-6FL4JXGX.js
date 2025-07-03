@@ -1,0 +1,1 @@
+import{a as t}from"./chunk-ZBJE3JOA.js";import{La as n}from"./chunk-H6KZ5SFA.js";var m=class i{transform(r,e="w500"){return r?`${t.imageBaseUrl}${e}${r}`:"/images/no-image.jpg"}static \u0275fac=function(e){return new(e||i)};static \u0275pipe=n({name:"posterUrl",type:i,pure:!0})};export{m as a};

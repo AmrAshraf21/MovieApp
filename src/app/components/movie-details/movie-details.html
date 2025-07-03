@@ -1,0 +1,174 @@
+@if (isLoading()) {
+<div class="loading">
+    <p-progressSpinner></p-progressSpinner>
+</div>
+} @else if (movie()) {
+
+<div class="movie-details-container">
+
+    <div class="container">
+        <div class="wrapper">
+
+            <div class="poster-section">
+
+
+                <!-- <img [src]="movie()!.poster_path | posterUrl:'w500'" [alt]="movie()?.title" class="poster" /> -->
+                <p-image [src]="movie()!.poster_path | posterUrl:'w500'" [preview]="true" alt="Image">
+                    <ng-template #indicator>
+                        <i class="pi pi-search"></i>
+                    </ng-template>
+                    <ng-template #image>
+                        <img [src]="movie()!.poster_path | posterUrl:'w500'" alt="image" width="250"
+                            style="border-radius: 20px;" />
+                    </ng-template>
+                    <ng-template #preview let-style="style" let-previewCallback="previewCallback">
+                        <img [src]="movie()!.poster_path | posterUrl:'w500'" alt="image" [style]="style"
+                            (click)="previewCallback()" />
+                    </ng-template>
+                </p-image>
+
+
+
+                <button pButton [icon]="isInWishlist() ? 'pi pi-heart-fill' : 'pi pi-heart'"
+                    [ngClass]="{ 'p-button-success': !isInWishlist(),'p-button-danger':isInWishlist() }"
+                    (click)="toggleWishlist()" style="font-size: 20px;"
+                    [label]="isInWishlist() ? 'Remove from Wishlist' : 'Add to Wishlist'"></button>
+            </div>
+
+            <div class="info-section">
+
+                <h1>{{ movie()?.title }}</h1>
+                <span class="date">{{ movie()?.release_date | date }}</span>
+                <div class="rate">
+                    @if(movie()!.vote_average < 2){ <i class="pi pi-star-fill"></i>
+                        <i class="pi pi-star"></i>
+                        <i class="pi pi-star"></i>
+                        <i class="pi pi-star"></i>
+                        <i class="pi pi-star"></i>
+
+                        }@else if(movie()!.vote_average < 4 && movie()!.vote_average> 2){
+                            <i class="pi pi-star-fill"></i>
+                            <i class="pi pi-star-fill"></i>
+                            <i class="pi pi-star"></i>
+                            <i class="pi pi-star"></i>
+                            <i class="pi pi-star"></i>
+
+                            } @else if(movie()!.vote_average <= 6){ <i class="pi pi-star-fill"></i>
+                                <i class="pi pi-star-fill"></i>
+                                <i class="pi pi-star-fill"></i>
+                                <i class="pi pi-star"></i>
+                                <i class="pi pi-star"></i>
+
+                                }@else if(movie()!.vote_average <= 8){ <i class="pi pi-star-fill"></i>
+                                    <i class="pi pi-star-fill"></i>
+                                    <i class="pi pi-star-fill"></i>
+                                    <i class="pi pi-star-fill"></i>
+                                    <i class="pi pi-star"></i>
+
+                                    }
+                                    @else {
+                                    <i class="pi pi-star-fill"></i>
+                                    <i class="pi pi-star-fill"></i>
+                                    <i class="pi pi-star-fill"></i>
+                                    <i class="pi pi-star-fill"></i>
+                                    <i class="pi pi-star-fill"></i>
+
+                                    }
+                                    <span>{{movie()!.vote_count}}</span>
+
+                </div>
+
+                <div class="duration">
+                    <p class="tagline">{{ movie()?.tagline }}</p>
+                    <span class="dur">Duration : <span> {{ movie()?.runtime }} Min</span> </span>
+                    <span class="lang">Language :
+                        @for (item of movie()?.spoken_languages; track $index) {
+                        <span>
+
+                            {{item.name}}
+                            @if($index < movie()?.spoken_languages!.length - 1){ - } </span>
+
+                                }
+                        </span>
+                </div>
+
+
+                <div class="meta-info">
+
+                    <p class="desc">{{ movie()?.overview }}</p>
+                    <div class="genres">
+                        @for (genre of movie()?.genres; track genre.id) {
+                        <p-tag class="gen" [value]="genre.name"></p-tag>
+                        }
+
+
+                    </div>
+                    <div class="company">
+                        @for (item of movie()?.production_companies; track $index)
+                        {
+                        @if(item.logo_path){
+
+                        <img [src]="item.logo_path | posterUrl:'w92'" alt="">
+                        }
+                        }
+                    </div>
+                    <div class="last">
+
+                        <a [href]="movie()?.homepage" target="_blank" class="website">Website <i
+                                class="pi pi-link"></i></a>
+
+                        <span class="rating">
+                            <i class="pi pi-star-fill"></i>
+                            {{ movie()?.vote_average | number:'1.1-1' }} ({{ movie()?.vote_count }} votes)
+                        </span>
+                        <span>Status: {{ movie()?.status }}</span>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <hr>
+
+        <div class="content">
+
+            <p-tabView>
+                <p-tabPanel header="Recommended">
+                    <div class="recommended-movies">
+                        @for (movie of recommendedMovies(); track movie.id) {
+                        <app-movie-card [movie]="movie"></app-movie-card>
+                        }@empty {
+                        <h2>There is No Recommendation for the type of this movies</h2>
+                        }
+                    </div>
+                </p-tabPanel>
+                <p-tabPanel header="Reviews">
+                    <div class="reviews">
+                        @for (review of reviews(); track review.id) {
+                        <div class="review">
+                            <div class="info">
+                                @if(review.author_details.avatar_path){
+
+                                <img [src]="review.author_details.avatar_path | posterUrl:'w154'" alt="user">
+                                }@else {
+                                <img src="/images/user.png" alt="user">
+                                }
+                                <h4>{{ review.author }}</h4>
+                            </div>
+                            <p class="review-date">{{ review.created_at | date }}</p>
+                            <p class="review-content">{{ review.content }}</p>
+                            <p-divider></p-divider>
+                            <a [href]="review.url">See the Review in the official website</a>
+                        </div>
+                        }
+                        @if (reviews().length === 0) {
+                        <p>No reviews available</p>
+                        }
+                    </div>
+                </p-tabPanel>
+            </p-tabView>
+        </div>
+    </div>
+</div>
+}

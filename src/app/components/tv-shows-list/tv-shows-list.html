@@ -1,0 +1,30 @@
+
+<section class="tv-shows-section">
+
+
+    <div class="container">
+        @if (isLoading()) {
+            <div class="loading">
+                <p-progressSpinner></p-progressSpinner>
+            </div>
+        } @else {
+            <div class="tv-shows-grid">
+                @for (tvShow of tvShows(); track tvShow.id) {
+                    <app-tv-show-card [tvShow]="tvShow"></app-tv-show-card>
+                }
+            </div>
+            
+            
+            @if (totalRecords() > 20) {
+                <p-paginator 
+                [rows]="20" 
+                [totalRecords]="totalRecords()" 
+                [pageLinkSize]="5"
+                (onPageChange)="onPageChange($event)"
+                [first]="(currentPage() - 1) * 20"
+                ></p-paginator>
+            }
+        }
+    </div>
+
+</section>

@@ -1,0 +1,156 @@
+
+
+.container{
+    width: 80%;
+    margin: auto;
+    padding: 3rem 0;
+    .wrapper{
+        display: flex;
+                .image{
+                    padding-right: 4rem;
+                    .test{
+                        border-radius: 30px;
+                        
+                    }
+                }
+
+        .info{
+            h2{
+                font-size: 50px;
+                margin: 0;
+                font-weight: bold;
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                color: coral;
+            }
+            .overview{
+                font-size: 22px;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                line-height: 40px;
+                margin: 0.2rem 0;
+            }
+            .status{
+                color: #2ac2fa;
+                font-size: 18px;
+            }
+            .languages span{
+                color: #345757;
+                font-size: 20px;
+                padding: 0.5rem 0;
+                display: inline-block;
+            }
+
+            .dates{
+                display: flex;
+                justify-content: space-between;
+                width: 70%;
+                span{
+                    color: #9799ad;
+                    font-size: 19px;
+                }
+            }
+
+            .genres{
+                display: flex;
+                padding: 0.5rem 0;
+                span{
+                    display: inline-block;
+                    background-color: rgb(8, 75, 199);
+                    padding:0.5rem 2rem;
+                    color: white;
+                    margin: 0.5rem;
+                    border-radius: 20px;
+                    
+                }
+                span:hover{
+                    background-color: rgb(8, 26, 61);
+                }
+
+            }
+
+            .episodes{
+                display: flex;
+                span{
+                    font-size: 25px;
+                    color: #032c3b;
+                    margin-right: 4rem;
+                }
+            }
+            .votes{
+                padding: 1.5rem 0;
+                i{
+                    margin-right: 0.5rem;
+                    font-size: 25px;
+                    color: rgb(240, 205, 7);
+                }
+                span{
+                    font-size: 25px;
+                    padding-left: 1rem;
+                }
+            }
+        
+            .production-company{
+                display: flex;
+                flex-wrap: wrap;
+                
+                img{
+                    object-fit: contain;
+                    margin-right: 4rem;
+                }
+            }
+            .website{
+                display: inline-block;
+                text-decoration: none;
+                padding: 0.5rem 2rem;
+                border: 3px solid #cacaca;
+                border-radius: 20px;
+                margin-top: 2rem;
+                font-size: 25px;
+                font-weight: bold;
+                color: #2696be;
+                &:hover{
+                    background-color: #cacac2;
+                    color: #0a0202;
+                }
+            }
+        }
+
+
+    }
+    .tabs-wrapper{
+        display: flex;
+        .image{
+            img{
+                border-radius: 20px;
+            }
+        }
+        .info{
+            padding-left: 3rem;
+            .air-date{
+                font-size: 17px;
+                color: gray;
+            }
+            .numbers{
+                font-size: 20px;
+                span{
+                    color: #2696be;
+                }
+            }
+            .overview{
+                font-size: 20px;
+             line-height: 30px;
+             font-family: Georgia, 'Times New Roman', Times, serif;
+             color: rgb(111, 9, 245);
+            }
+            .rate{
+                font-size: 20px;
+                i{
+                    color: goldenrod;
+                }
+            }
+        }
+    }
+        .seasons{
+            padding: 3rem 0;
+        }
+
+}

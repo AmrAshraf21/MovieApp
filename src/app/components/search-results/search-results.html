@@ -1,0 +1,68 @@
+<div class="search-results-container">
+    <div class="search-header">
+        <h2>
+            @if (searchQuery()) {
+            Search Results for "{{ searchQuery() }}"
+            } @else {
+            Search Movies
+            }
+        </h2>
+        <p>Found {{ totalRecords() }} results</p>
+    </div>
+
+    @if (isLoading()) {
+    <div class="loading">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+    } @else {
+    @if (movies().length > 0) {
+    <div class="results-grid">
+        @for (movie of movies(); track movie.id) {
+        <div class="movie-card" [routerLink]="['/movies', movie.id]">
+            <div class="poster-container">
+                @if(!movie.poster_path){
+                    <img src="/images/no-image.jpg" [alt]="movie.title">
+                }@else {
+
+                    <img [src]="movie.poster_path | posterUrl:'w342'" [alt]="movie.title" class="poster" />
+                }
+
+                <div class="first-ele">
+                    <h3 class="title">{{ movie.title }}</h3>
+                    <app-heart-icon class="wishlist-button" (click)="toggleWishlist($event,movie)"
+                        [ngClass]="{ 'active': isInWishlist(movie) }" [size]="'2rem'" [color]="'#10258f'"
+                        [filled]="isInWishlist(movie)"></app-heart-icon>
+
+                </div>
+            </div>
+            <div class="movie-info">
+                <div class="details">
+                    <span class="release-date">{{ movie.release_date | monthTranform }} </span>
+                    <span class="rating">
+                        <i class="pi pi-star-fill"></i>
+                        {{ movie.vote_average | number:'1.1-1' }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+
+    @if (totalRecords() > 20) {
+    <p-paginator [rows]="20" [totalRecords]="totalRecords()" [pageLinkSize]="5" (onPageChange)="onPageChange($event)"
+        [first]="(currentPage() - 1) * 20"></p-paginator>
+    }
+    } @else if (searchQuery()) {
+    <div class="no-results">
+        <i class="pi pi-search" style="font-size: 2rem"></i>
+        <h3>No results found for "{{ searchQuery() }}"</h3>
+        <p>Try different keywords or check your spelling</p>
+    </div>
+    } @else {
+    <div class="no-query">
+        <i class="pi pi-info-circle" style="font-size: 2rem"></i>
+        <h3>Enter a search term to find movies</h3>
+    </div>
+    }
+    }
+</div>

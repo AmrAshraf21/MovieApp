@@ -1,0 +1,34 @@
+<header>
+    <div class="logo">
+        <!-- <a routerLink="/">Movie App</a> -->
+        <a>Movie App</a>
+    </div>
+
+    <p-tabs value="/movie">
+        <p-tablist>
+            @for(tab of navItems; track $index){
+            <p-tab [value]="tab.routerLink" [routerLink]="tab.routerLink" class="flex items-center !gap-2 text-inherit">
+                <i [class]="tab.icon"></i>
+                <span>{{ tab.label }}</span>
+            </p-tab>
+            }
+        </p-tablist>
+    </p-tabs>
+
+    <div class="wrapper">
+
+        <div class="actions">
+
+            <p-dropdown [options]="supportedLanguages" [(ngModel)]="currentLanguage"
+                (onChange)="changeLanguage($event.value)" styleClass="my-custom-dropdown"
+                placeholder="Select language">
+            </p-dropdown>
+            <span> Wishlist</span>
+            <i class="pi pi-heart-fill text-xl" routerLink="/wishlist" pBadge severity="danger" badgeSize="large"
+                [value]="wishlistCount()"></i>
+            `
+
+        </div>
+    </div>
+
+</header>
