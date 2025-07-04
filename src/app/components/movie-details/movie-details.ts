@@ -72,6 +72,7 @@ export class MovieDetailsComponent {
     
     this.apiService.getMovieDetails(id, this.languageService.getCurrentLanguage()())
       .subscribe(movie => {
+        console.log(movie);
         
         this.movie.set(movie);
         this.isLoading.set(false);

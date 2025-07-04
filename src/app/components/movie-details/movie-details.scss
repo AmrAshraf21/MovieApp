@@ -5,17 +5,29 @@
     align-items: center;
     height: 100%;
 }
+.background-image{
+     min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+}
+ .overlay {
+    background-color: rgba(0, 0, 0, 0.608);
+    color: #fff;
+    padding: 3rem;
+    min-height: 100vh;
+  }
 .container{
     margin: auto;
     width: 90%;
-    z-index: 999;
     
     .wrapper{
         display: flex;
         padding: 3rem 0;
-      
+        
         .poster-section{
-            width: 40%;
+            width: 70%;
             img{
                 border-radius: 20px;
                 width: 100%;
@@ -127,7 +139,7 @@
                     display: block;
                     width: fit-content;
                     font-size: 30px;
-                    color: black;
+                    color: rgb(236, 224, 224);
                     i{
                         font-size: 25px;
                     }

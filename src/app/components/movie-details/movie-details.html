@@ -5,80 +5,82 @@
 } @else if (movie()) {
 
 <div class="movie-details-container">
+    <div class="background-image" [ngStyle]="{'background-image':movie()?.backdrop_path?  'url(https://image.tmdb.org/t/p/original' + movie()?.backdrop_path+ ')' : 'none'}">
+        <div class="overlay">
 
+        
     <div class="container">
-        <div class="wrapper">
 
-            <div class="poster-section">
-
-
-                <!-- <img [src]="movie()!.poster_path | posterUrl:'w500'" [alt]="movie()?.title" class="poster" /> -->
-                <p-image [src]="movie()!.poster_path | posterUrl:'w500'" [preview]="true" alt="Image">
-                    <ng-template #indicator>
-                        <i class="pi pi-search"></i>
-                    </ng-template>
+            <div class="wrapper">
+                
+                <div class="poster-section">
+                    
+                    <p-image [src]="movie()!.backdrop_path | posterUrl:'w500'" [preview]="true" alt="Image">
+                        <ng-template #indicator>
+                            <i class="pi pi-search"></i>
+                        </ng-template>
                     <ng-template #image>
                         <img [src]="movie()!.poster_path | posterUrl:'w500'" alt="image" width="250"
-                            style="border-radius: 20px;" />
+                        style="border-radius: 20px;" />
                     </ng-template>
                     <ng-template #preview let-style="style" let-previewCallback="previewCallback">
                         <img [src]="movie()!.poster_path | posterUrl:'w500'" alt="image" [style]="style"
-                            (click)="previewCallback()" />
+                        (click)="previewCallback()" />
                     </ng-template>
                 </p-image>
-
-
+                
+                
 
                 <button pButton [icon]="isInWishlist() ? 'pi pi-heart-fill' : 'pi pi-heart'"
-                    [ngClass]="{ 'p-button-success': !isInWishlist(),'p-button-danger':isInWishlist() }"
+                [ngClass]="{ 'p-button-success': !isInWishlist(),'p-button-danger':isInWishlist() }"
                     (click)="toggleWishlist()" style="font-size: 20px;"
                     [label]="isInWishlist() ? 'Remove from Wishlist' : 'Add to Wishlist'"></button>
-            </div>
-
-            <div class="info-section">
-
-                <h1>{{ movie()?.title }}</h1>
-                <span class="date">{{ movie()?.release_date | date }}</span>
-                <div class="rate">
-                    @if(movie()!.vote_average < 2){ <i class="pi pi-star-fill"></i>
+                </div>
+                
+                <div class="info-section">
+                    
+                    <h1>{{ movie()?.title }}</h1>
+                    <span class="date">{{ movie()?.release_date | date }}</span>
+                    <div class="rate">
+                        @if(movie()!.vote_average < 2){ <i class="pi pi-star-fill"></i>
                         <i class="pi pi-star"></i>
                         <i class="pi pi-star"></i>
                         <i class="pi pi-star"></i>
                         <i class="pi pi-star"></i>
-
-                        }@else if(movie()!.vote_average < 4 && movie()!.vote_average> 2){
-                            <i class="pi pi-star-fill"></i>
-                            <i class="pi pi-star-fill"></i>
-                            <i class="pi pi-star"></i>
-                            <i class="pi pi-star"></i>
-                            <i class="pi pi-star"></i>
-
-                            } @else if(movie()!.vote_average <= 6){ <i class="pi pi-star-fill"></i>
-                                <i class="pi pi-star-fill"></i>
-                                <i class="pi pi-star-fill"></i>
-                                <i class="pi pi-star"></i>
-                                <i class="pi pi-star"></i>
-
-                                }@else if(movie()!.vote_average <= 8){ <i class="pi pi-star-fill"></i>
-                                    <i class="pi pi-star-fill"></i>
+                        
+                    }@else if(movie()!.vote_average < 4 && movie()!.vote_average> 2){
+                        <i class="pi pi-star-fill"></i>
+                        <i class="pi pi-star-fill"></i>
+                        <i class="pi pi-star"></i>
+                        <i class="pi pi-star"></i>
+                        <i class="pi pi-star"></i>
+                        
+                    } @else if(movie()!.vote_average <= 6){ <i class="pi pi-star-fill"></i>
+                    <i class="pi pi-star-fill"></i>
+                    <i class="pi pi-star-fill"></i>
+                    <i class="pi pi-star"></i>
+                    <i class="pi pi-star"></i>
+                    
+                }@else if(movie()!.vote_average <= 8){ <i class="pi pi-star-fill"></i>
+                <i class="pi pi-star-fill"></i>
                                     <i class="pi pi-star-fill"></i>
                                     <i class="pi pi-star-fill"></i>
                                     <i class="pi pi-star"></i>
-
-                                    }
-                                    @else {
+                                    
+                                }
+                                @else {
                                     <i class="pi pi-star-fill"></i>
                                     <i class="pi pi-star-fill"></i>
                                     <i class="pi pi-star-fill"></i>
                                     <i class="pi pi-star-fill"></i>
                                     <i class="pi pi-star-fill"></i>
-
-                                    }
-                                    <span>{{movie()!.vote_count}}</span>
-
-                </div>
-
-                <div class="duration">
+                                    
+                                }
+                                <span>{{movie()!.vote_count}}</span>
+                                
+                            </div>
+                            
+                            <div class="duration">
                     <p class="tagline">{{ movie()?.tagline }}</p>
                     <span class="dur">Duration : <span> {{ movie()?.runtime }} Min</span> </span>
                     <span class="lang">Language :
@@ -88,13 +90,13 @@
                             {{item.name}}
                             @if($index < movie()?.spoken_languages!.length - 1){ - } </span>
 
-                                }
-                        </span>
+                        }
+                    </span>
                 </div>
-
-
+                
+                
                 <div class="meta-info">
-
+                    
                     <p class="desc">{{ movie()?.overview }}</p>
                     <div class="genres">
                         @for (genre of movie()?.genres; track genre.id) {
@@ -113,23 +115,24 @@
                         }
                     </div>
                     <div class="last">
-
+                        
                         <a [href]="movie()?.homepage" target="_blank" class="website">Website <i
-                                class="pi pi-link"></i></a>
-
-                        <span class="rating">
-                            <i class="pi pi-star-fill"></i>
-                            {{ movie()?.vote_average | number:'1.1-1' }} ({{ movie()?.vote_count }} votes)
-                        </span>
+                            class="pi pi-link"></i></a>
+                            
+                            <span class="rating">
+                                <i class="pi pi-star-fill"></i>
+                                {{ movie()?.vote_average | number:'1.1-1' }} ({{ movie()?.vote_count }} votes)
+                            </span>
                         <span>Status: {{ movie()?.status }}</span>
                     </div>
                 </div>
-
-
-
+                
+                
+                
             </div>
         </div>
-        <hr>
+        </div>
+       </div>
 
         <div class="content">
 
