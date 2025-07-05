@@ -32,7 +32,7 @@
 
 
 
-                      
+
                     </div>
 
                     <div class="info-section">
@@ -76,10 +76,12 @@
                                             }
                                             <span>{{movie()!.vote_count}}</span>
 
-                                            <button class="trailer" (click)="openTrailerModal(movie()!.id)">🎬 Watch Trailer</button>
+                                            <button class="trailer" (click)="openTrailerModal(movie()!.id)">🎬 Watch
+                                                Trailer</button>
                                             <div class="modal-backdrop" *ngIf="showTrailer()">
                                                 <div class="modal-content">
-                                                    <button class="close-btn" (click)="closeTrailerModal()"><i class="pi pi-times"></i></button>
+                                                    <button class="close-btn" (click)="closeTrailerModal()"><i
+                                                            class="pi pi-times"></i></button>
 
                                                     <iframe *ngIf="trailerUrl" [src]="trailerUrl | safe" width="100%"
                                                         height="400" frameborder="0" allowfullscreen></iframe>
@@ -123,6 +125,12 @@
                             </div>
                             <div class="last">
 
+                                <button pButton [icon]="isInWishlist() ? 'pi pi-heart-fill' : 'pi pi-heart'"
+                                    class="buton"
+                                    [ngClass]="{ 'p-button-success': !isInWishlist(),'p-button-danger':isInWishlist() }"
+                                    (click)="toggleWishlist()" style="font-size: 20px;"
+                                    [label]="isInWishlist() ? 'Remove from Wishlist' : 'Add to Wishlist'"></button>
+
                                 <a [href]="movie()?.homepage" target="_blank" class="website">Website <i
                                         class="pi pi-link"></i></a>
 
@@ -131,14 +139,11 @@
                                     {{ movie()?.vote_average | number:'1.1-1' }} ({{ movie()?.vote_count }} votes)
                                 </span>
                                 <span>Status: {{ movie()?.status }}</span>
-                            </div>
-                        </div>
 
-  <button pButton [icon]="isInWishlist() ? 'pi pi-heart-fill' : 'pi pi-heart'"
-                            class="buton"
-                            [ngClass]="{ 'p-button-success': !isInWishlist(),'p-button-danger':isInWishlist() }"
-                            (click)="toggleWishlist()" style="font-size: 20px;"
-                            [label]="isInWishlist() ? 'Remove from Wishlist' : 'Add to Wishlist'"></button>
+
+                            </div>
+
+                        </div>
 
                     </div>
                 </div>
