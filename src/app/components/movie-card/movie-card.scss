@@ -1,11 +1,18 @@
+
+.card-wrapper{
+    padding: 1rem 0;
+}
 .movie-card{
-    
-    border: 2px solid rgb(224, 215, 215);
-    border-radius: 20px;
-    padding-bottom: 1rem;
-    margin: 0.5rem;
-    width: 250px;
-    height: 500px;
+    background: #333;
+  padding: 12px;
+  border-radius: 20px;
+  color: white;
+    // border: 2px solid rgb(224, 215, 215);
+    // border-radius: 20px;
+    // padding-bottom: 1rem;
+    // // margin: 0.5rem;
+    // width: 250px;
+    // height: 500px;
     .poster-container{
         position: relative;
         
@@ -71,7 +78,7 @@
         align-items: center;
         padding: 0 1rem;
         .title{
-               
+               font-size: 15px;
         }
     }
     .wishlist-button{

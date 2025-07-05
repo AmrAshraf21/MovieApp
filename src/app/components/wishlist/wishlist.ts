@@ -34,8 +34,7 @@ export class WishlistComponent {
   private wishlistService = inject(WishlistService);
 
   wishlistItems = this.wishlistService.getWishlist();
-  showAl = false;
-
+ 
   movies  = this.wishlistService.movies;
   tvShows  = this.wishlistService.tvShowsOnly;
 
@@ -47,14 +46,9 @@ export class WishlistComponent {
     this.wishlistService.removeFromWishlist(id, type);
   }
 
-  clearWishlist() {
-    this.wishlistService.clearWishlist();
-  }
+ 
 
-  toggleString(){
-    this.showAl = !this.showAl;
-  }
-
+ 
   // Helper methods to properly type the items
   asMovie(item: any): Movie {
     return {

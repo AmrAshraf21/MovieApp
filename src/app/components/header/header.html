@@ -7,13 +7,14 @@
     <p-tabs value="/movie">
         <p-tablist>
             @for(tab of navItems; track $index){
-            <p-tab [value]="tab.routerLink" [routerLink]="tab.routerLink" class="flex items-center !gap-2 text-inherit">
-                <i [class]="tab.icon"></i>
-                <span>{{ tab.label }}</span>
+            <p-tab [value]="tab.routerLink" [routerLink]="tab.routerLink" routerLinkActive="active" class="flex items-center !gap-2 text-inherit">
+                <i [class]="tab.icon" style="color: rgb(23, 104, 154);"></i>
+                <span style="color:rgb(63, 59, 59);">{{ tab.label }}</span>
             </p-tab>
             }
         </p-tablist>
     </p-tabs>
+
 
     <div class="wrapper">
 
@@ -24,11 +25,13 @@
                 placeholder="Select language">
             </p-dropdown>
             <span> Wishlist</span>
-            <i class="pi pi-heart-fill text-xl" routerLink="/wishlist" pBadge severity="danger" badgeSize="large"
+            <i class="pi pi-heart-fill text-xl" routerLink="/wishlist" pBadge severity="info" badgeSize="large"
                 [value]="wishlistCount()"></i>
             `
 
         </div>
+        
     </div>
+
 
 </header>

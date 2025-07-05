@@ -26,14 +26,20 @@
             padding:0.5rem 1rem ;
             width: 80%;
             border-radius: 10px;
-            color: #c1c1c1;
-            
+            color: #4c4747;
+            &:focus{
+                font-size: 20px;
+            }
+            &::placeholder{
+                font-size: 16px;
+            }
         }
         button{
-            background-color:#ffe353;
+            background-color:#04648a;
+            color: white;
             margin-left:29px ;
             padding:12px 36px;
-            color: rgba(5, 5, 5, 1);
+            font-weight: bold   ;
             border-radius: 10px;
             border: none;
 
@@ -47,17 +53,22 @@
         padding:1rem 0;
     }
     .movie-grid{
-        width: 100%;
-        background-color: #c1c1c11a;
-        border-radius: 30px;
-        .wrapper{
-            display: flex;
-            flex-wrap: wrap;
-            
-            padding: 0 0 2rem 3rem;
-        }
-        
+        display: grid;
+         grid-template-columns: repeat(4, 1fr);
+  gap: 16px
     }
+    // .movie-grid{
+    //     width: 100%;
+    //     background-color: #c1c1c11a;
+    //     border-radius: 30px;
+    //     .wrapper{
+    //         display: flex;
+    //         flex-wrap: wrap;
+    //         justify-content: space-evenly;
+            
+    //     }
+        
+    // }
    
 }
 }

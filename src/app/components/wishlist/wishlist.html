@@ -1,42 +1,3 @@
-<!-- features/wishlist/pages/wishlist/wishlist.component.html -->
-<!-- <div class="container">
-  <h1>Your Wishlist</h1>
-  
-  @if (wishlistItems().length === 0) {
-    <div class="empty-wishlist">
-      <i class="pi pi-heart"></i>
-      <img src="/images/Group.png" alt="">
-      <p class="no">No Movies in watch list</p>
-      <p-button 
-        label="Back to Home" 
-        icon="pi pi-film"
-        class="browse"
-        severity="warn"
-        routerLink="/"
-      ></p-button>
-      
-
-    </div>
-  } @else {
-    <div class="wishlist-items">
-      @for (item of wishlistItems(); track item.id) {
-        <div class="wishlist-item">
-          @if (item.type === 'movie') {
-            <app-movie-card [movie]="asMovie(item)"></app-movie-card>
-          } @else {
-            <app-tv-show-card [tvShow]="asTVShow(item)"></app-tv-show-card>
-          }
-          <button 
-            pButton 
-            icon="pi pi-times" 
-            class="p-button-rounded p-button-danger remove-button"
-            (click)="removeFromWishlist(item.id, item.type)"
-          ></button>
-        </div>
-      }
-    </div>
-  }
-</div> -->
 
 
 <section class="wishlist-section">
@@ -65,11 +26,12 @@
         
         <div class="wishlist-card">
           <a [routerLink]="['/movies',item.id]">
-          <div class="image">
-        <img [src]="'https://image.tmdb.org/t/p/'+'/w200'+item.poster_path" [alt]="item.title" class="poster" />
+          
+        <!-- <img [src]="'https://image.tmdb.org/t/p/'+'/original'+item.poster_path" [alt]="item.title" class="poster" /> -->
+        <img [src]="item.poster_path | posterUrl:'original'" [alt]="item.title" class="poster" />
             
               <!-- <img [src]="item.poster_path | posterUrl:'w154'" alt=""> -->
-            </div>
+          
           </a>
       <div class="content">
         

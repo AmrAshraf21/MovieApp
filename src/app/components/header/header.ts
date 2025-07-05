@@ -11,6 +11,7 @@ import {  DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { TabPanel, TabView } from 'primeng/tabview';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ToolbarModule } from 'primeng/toolbar';
 
 
 import { BadgeModule } from 'primeng/badge';
@@ -20,7 +21,7 @@ import { OverlayBadgeModule } from 'primeng/overlaybadge';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule ,SelectModule,TabsModule,RouterModule,RouterLink, OverlayBadgeModule,FormsModule,TabView,TabPanel,AutoCompleteModule, BadgeModule,ButtonModule,DropdownModule],
+  imports: [CommonModule ,SelectModule,TabsModule,ToolbarModule,RouterModule,RouterLink, OverlayBadgeModule,FormsModule,TabView,TabPanel,AutoCompleteModule, BadgeModule,ButtonModule,DropdownModule],
   templateUrl: './header.html',
   styleUrls: ['./header.scss']
 })

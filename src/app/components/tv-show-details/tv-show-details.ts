@@ -47,6 +47,8 @@ ngOnInit(){
   loadTvShowDetails(id:number){
     this.isLoading.set(true);
     this.apiService.getTVShowDetails(id,this.languageService.getCurrentLanguage()()).subscribe(res=>{
+      console.log(res);
+      
       this.tvShow.set(res);
     this.isLoading.set(false);
       console.log(this.tvShow());

@@ -14,14 +14,16 @@
     <div class="loading">
         <p-progressSpinner></p-progressSpinner>
     </div>
-    } @else {
+    } 
+    @else {
     @if (movies().length > 0) {
     <div class="results-grid">
         @for (movie of movies(); track movie.id) {
+            .
         <div class="movie-card" [routerLink]="['/movies', movie.id]">
             <div class="poster-container">
                 @if(!movie.poster_path){
-                    <img src="/images/no-image.jpg" [alt]="movie.title">
+                    <img src="images/no-image.jpg" [alt]="movie.title">
                 }@else {
 
                     <img [src]="movie.poster_path | posterUrl:'w342'" [alt]="movie.title" class="poster" />

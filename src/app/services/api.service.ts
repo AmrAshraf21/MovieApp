@@ -57,4 +57,9 @@ export class ApiService {
       `${this.baseUrl}/tv/${id}?api_key=${this.apiKey}&language=${language}`
     );
   }
+
+  getMovieVideo(id:number){
+    return this.http.get(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=${this.apiKey}`)
+  }
+
 }

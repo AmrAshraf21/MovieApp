@@ -1,8 +1,11 @@
-<div class="movie-card" [routerLink]="['/movies', movie.id]">
-    <div class="poster-container">
-        <!-- <img [src]="movie.poster_path | posterUrl:'w92'" [alt]="movie.title" class="poster" /> -->
-        <img [src]="'https://image.tmdb.org/t/p/'+'/w400'+movie.poster_path" [alt]="movie.title" class="poster" />
-        
+<!-- <div class="card-wrapper"> -->
+
+    <div class="movie-card" [routerLink]="['/movies', movie.id]">
+        <div class="poster-container">
+            <!-- <img [src]="movie.poster_path | posterUrl:'w92'" [alt]="movie.title" class="poster" /> -->
+            <!-- <img [src]="'https://image.tmdb.org/t/p/'+'/original'+movie.poster_path" [alt]="movie.title" class="poster" /> -->
+            <img [src]="movie.poster_path | posterUrl" [alt]="movie.title" class="poster" />
+            
 
             @if(movie.vote_average > 7){
                 
@@ -13,12 +16,12 @@
             }
         
     </div>
-        <div class="first-ele">
+    <div class="first-ele">
             <h3 class="title">{{ movie.title }}</h3>
             <app-heart-icon class="wishlist-button" (click)="toggleWishlist($event)"
-                [ngClass]="{ 'active': isInWishlist() }" [size]="'2rem'"
-                [filled]="isInWishlist()"></app-heart-icon>
-
+            [ngClass]="{ 'active': isInWishlist() }" [size]="'2rem'"
+            [filled]="isInWishlist()"></app-heart-icon>
+            
     </div>
     <div class="movie-info">
         <div class="details">
@@ -29,9 +32,6 @@
             </span>
         </div>
     </div>
-</div>
+<!-- </div> -->
 
-<!-- 
- <div class="progress-circle">
-        <span class="progress-value">85%</span>
-    </div> -->
+</div>

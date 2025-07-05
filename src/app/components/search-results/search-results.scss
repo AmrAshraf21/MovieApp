@@ -1,19 +1,23 @@
 .search-results-container {
   padding: 2rem;
-width: 90%;
+  width: 80%;
   margin: 0 auto;
 
   .search-header {
-    margin-bottom: 2rem;
+    
     
     h2 {
       margin: 0;
-      color: var(--text-color);
+      color: #a09191;
+      font-size: 30px;
+      text-align: center;
     }
 
     p {
       margin: 0.5rem 0 0;
-      color: var(--text-secondary-color);
+      color: rgb(88, 125, 125);
+      font-size: 20px;
+      text-align: center;
     }
   }
 
@@ -26,23 +30,27 @@ width: 90%;
   .results-grid {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-evenly;
     .movie-card{
+      width: 20%;
+      border-radius: 10px;
         .poster-container{
-                width: 100%;
+                
             img{
                 width: 100%;
+                border-radius: 10px;
             }
         }
-        width: 15%;
         
-        box-shadow: 10px 10px 20px #a09191;
         margin:1rem ;
         .first-ele{
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 0.5rem;
+            .title{
+              font-size: 14px;
+            }
         }
         .movie-info{
             .details{

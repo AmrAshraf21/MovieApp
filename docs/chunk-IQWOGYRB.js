@@ -1,0 +1,1 @@
+import{Wa as t}from"./chunk-2XIWJZZI.js";var n={tmdbApiKey:"072ea016bd72b6a110cfbd636875f7eb",imageBaseUrl:"https://image.tmdb.org/t/p/"};var m=class i{transform(e,r="w500"){return e?`${n.imageBaseUrl}${r}${e}`:"/images/no-image.jpg"}static \u0275fac=function(r){return new(r||i)};static \u0275pipe=t({name:"posterUrl",type:i,pure:!0})};export{n as a,m as b};

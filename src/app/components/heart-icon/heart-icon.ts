@@ -9,6 +9,6 @@ import { Component, Input } from '@angular/core';
 })
 export class HeartIcon {
  @Input() filled: boolean = false;
-  @Input() color: string = '#dc3545'; // Default red color
+  @Input() color: string = '#dc3545'; 
   @Input() size: string = '1rem'; 
 }

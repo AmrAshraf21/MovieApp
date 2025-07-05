@@ -9,11 +9,12 @@ import { MovieCardComponent } from '../movie-card/movie-card';
 import { TabViewModule } from 'primeng/tabview';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
-// import { HeartIconComponent } from '../../icons/heart-icon.component';
+import { ChangeDetectorRef } from '@angular/core';
 import { PosterUrlPipe } from '../../pipes/poster-url-pipe';
 import { ProgressSpinner } from 'primeng/progressspinner';
 import { Tag } from 'primeng/tag';
 import { ImageModule } from 'primeng/image';
+import { SafePipe } from '../../pipes/safe-pipe';
 
 @Component({
   selector: 'app-movie-details',
@@ -28,7 +29,8 @@ import { ImageModule } from 'primeng/image';
     ProgressSpinner,
     RouterModule,
     Tag,
-    ImageModule
+    ImageModule,
+    SafePipe
   ],
   templateUrl: './movie-details.html',
   styleUrls: ['./movie-details.scss']
@@ -38,11 +40,19 @@ export class MovieDetailsComponent {
   private languageService = inject(LanguageService);
   private route = inject(ActivatedRoute);
   private wishlistService = inject(WishlistService);
+  private cdr = inject(ChangeDetectorRef);
+
 
   movie = signal<MovieDetails | null>(null);
   recommendedMovies = signal<Movie[]>([]);
   reviews = signal<Review[]>([]);
   isLoading = signal(false);
+
+  trailerUrl: string | null = null;
+  // showTrailer: boolean = false;
+  showTrailer = signal(false);
+
+
 
   // constructor() {
   //   this.route.params.subscribe(params => {
@@ -63,6 +73,7 @@ export class MovieDetailsComponent {
      this.route.params.subscribe(params => {
        
       this.loadMovieDetails(params['id']);
+      // this.loadMovieVideo(params['id']);
     });
     
   }
@@ -72,7 +83,7 @@ export class MovieDetailsComponent {
     
     this.apiService.getMovieDetails(id, this.languageService.getCurrentLanguage()())
       .subscribe(movie => {
-        console.log(movie);
+        
         
         this.movie.set(movie);
         this.isLoading.set(false);
@@ -85,8 +96,6 @@ export class MovieDetailsComponent {
 
     this.apiService.getMovieReviews(id, this.languageService.getCurrentLanguage()())
       .subscribe(response => {
-        console.log(response);
-        
         
         this.reviews.set(response.results);
       });
@@ -101,4 +110,41 @@ export class MovieDetailsComponent {
   isInWishlist(): boolean {
     return this.movie() ? this.wishlistService.isInWishlist(this.movie()!.id, 'movie') : false;
   }
+
+  openTrailerModal(id:number) {
+    this.apiService.getMovieVideo(id).subscribe((data:any) => {
+      const trailer = data.results.find(
+        (v: any) => v.site === 'YouTube' && v.type === 'Trailer'
+      );
+
+      if (trailer) {
+        this.trailerUrl = `https://www.youtube.com/embed/${trailer.key}`;
+       this.showTrailer.set(true);
+        // this.showTrailer = true;
+        // this.cdr.detectChanges();
+      }
+    });
+  }
+
+  closeTrailerModal() {
+    this.showTrailer.set(false);
+    this.trailerUrl = null;
+  }
+
+  // loadMovieVideo(id:number){
+  //   this.apiService.getMovieVideo(id).subscribe((data:any)=>{
+  //     console.log(data.results);
+      
+  //     const isTrailerExist = data.results.find((e:any)=>
+  //       e.site ==='YouTube' && e.type==='Trailer'
+  //     )
+  //     if(isTrailerExist){
+  //       this.video = `https://www.youtube.com/embed/${isTrailerExist.key}`
+        
+  //     }else{
+  //       this.video = null
+  //     }
+      
+  //   })
+  // }
 }
