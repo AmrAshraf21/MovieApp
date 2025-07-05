@@ -6,10 +6,14 @@
     height: 100%;
 }
 .background-image{
-     min-height: 100vh;
-  background-size: cover;
+     
+    background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  height: 100vh;
+  
+  
+
   
 }
  .overlay {
@@ -27,15 +31,20 @@
         padding: 3rem 0;
         
         .poster-section{
-            
+            width: 60%;
             img{
                 border-radius: 20px;
+                height: 100%;
                 width: 100%;
             }
         }
 
         .info-section{
             padding-left: 2rem;
+            .buton{
+                margin-top: 2rem;
+                
+            }
             h1{
                 font-size: 40px;
                 font-weight: bold;
@@ -235,6 +244,10 @@
     margin-left: 3rem;
     background-color: transparent;
     color: white;
+    &:hover{
+        background-color: #cccccc46;
+        cursor: pointer;
+    }
 }
 .modal-backdrop {
   position: fixed;

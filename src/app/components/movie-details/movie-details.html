@@ -16,12 +16,12 @@
 
                     <div class="poster-section">
 
-                        <p-image [src]="movie()!.backdrop_path | posterUrl:'original'" [preview]="true" alt="Image">
+                        <p-image [src]="movie()!.poster_path | posterUrl:'original'" [preview]="true" alt="Image">
                             <ng-template #indicator>
                                 <i class="pi pi-search"></i>
                             </ng-template>
                             <ng-template #image>
-                                <img [src]="movie()!.poster_path | posterUrl:'w780'" alt="image" width="250"
+                                <img [src]="movie()!.poster_path | posterUrl:'original'" alt="image" width="250"
                                     style="border-radius: 20px;" />
                             </ng-template>
                             <ng-template #preview let-style="style" let-previewCallback="previewCallback">
@@ -32,10 +32,7 @@
 
 
 
-                        <button pButton [icon]="isInWishlist() ? 'pi pi-heart-fill' : 'pi pi-heart'"
-                            [ngClass]="{ 'p-button-success': !isInWishlist(),'p-button-danger':isInWishlist() }"
-                            (click)="toggleWishlist()" style="font-size: 20px;"
-                            [label]="isInWishlist() ? 'Remove from Wishlist' : 'Add to Wishlist'"></button>
+                      
                     </div>
 
                     <div class="info-section">
@@ -137,7 +134,11 @@
                             </div>
                         </div>
 
-
+  <button pButton [icon]="isInWishlist() ? 'pi pi-heart-fill' : 'pi pi-heart'"
+                            class="buton"
+                            [ngClass]="{ 'p-button-success': !isInWishlist(),'p-button-danger':isInWishlist() }"
+                            (click)="toggleWishlist()" style="font-size: 20px;"
+                            [label]="isInWishlist() ? 'Remove from Wishlist' : 'Add to Wishlist'"></button>
 
                     </div>
                 </div>
